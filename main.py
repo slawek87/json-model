@@ -10,7 +10,7 @@ class SimpleModel(object):
 
 if __name__ == '__main__':
     simple_model = SimpleModel()
-
     simple_model.name = "Sławek"
+    simple_model.name = 1
 
     print(simple_model.name)

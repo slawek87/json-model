@@ -1,16 +1,25 @@
 class Field(object):
     field_type = None
+    field_name = None
 
-    def __get__(self, instance, owner):
-        getattr(instance, self.value)
+    def __init__(self, value=None):
+        self.value = value
 
-    def __init__(self):
-        self.value = None
+    def __get__(self, instance, cls):
+        if instance:
+            return getattr(instance, "value", None)
+
+        return None
 
     def __set__(self, instance, value):
+        if not value:
+            return None
+
         if not isinstance(value, self.field_type):
-            raise TypeError("Must be a %s" % self.field_type)
-        setattr(instance, self.value, value)
+            error = "Must be a {field_name}".format(field_name=self.field_name)
+            raise TypeError(error)
+
+        setattr(instance, "value", value)
 
     def __delete__(self, instance):
         raise AttributeError("Can't delete attribute")
@@ -18,18 +27,22 @@ class Field(object):
 
 class Integer(Field):
     field_type = int
+    type_name = "Integer"
 
 
 class String(Field):
     field_type = str
+    field_name = "String"
 
 
 class Float(Field):
     field_type = float
+    field_name = "Float"
 
 
 class List(Field):
     field_type = list
+    field_name = "List"
 
 
 class TimeStamp(object):
