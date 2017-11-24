@@ -2,7 +2,10 @@ class Field(object):
     field_type = None
     field_name = None
 
-    def __init__(self, value=None):
+    empty_values = ["", None]
+
+    def __init__(self, value=None, required=False):
+        self.required = required
         self.value = value
 
     def __get__(self, instance, cls):
@@ -12,7 +15,10 @@ class Field(object):
         return None
 
     def __set__(self, instance, value):
-        if not value:
+        if self.required and value in self.empty_values:
+            error = "Field {field_name} cannot be empty value.".format(field_name=self.field_name)
+            raise TypeError(error)
+        elif not value:
             return None
 
         if not isinstance(value, self.field_type):
