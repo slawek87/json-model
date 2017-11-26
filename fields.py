@@ -75,7 +75,7 @@ class Datetime(Field):
 
 
 class ForeignField(Field):
-    field_name = "Datetime"
+    field_name = "ForeignField"
 
     def __init__(self, foreign_model, *args, **kwargs):
         super().__init__(*args, **kwargs)
