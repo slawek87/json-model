@@ -74,5 +74,9 @@ class Datetime(Field):
     field_name = "Datetime"
 
 
-class ForeignField(object):
-    pass
+class ForeignField(Field):
+    field_name = "Datetime"
+
+    def __init__(self, foreign_model, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.field_type = foreign_model
