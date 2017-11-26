@@ -1,22 +1,22 @@
 import datetime
 
 
+class JsonModel(object):
+    pass
+
+
 class Field(object):
     field_type = None
     field_name = None
 
     empty_values = ["", None]
 
-    def __init__(self, value=None, required=False):
+    def __init__(self, default=None, required=False):
         self.required = required
-        self.value = value
+        self.value = default
 
-    def __get__(self, instance, cls):
-        """Returns value if instance was created."""
-        if instance:
-            return getattr(instance, "value", None)
-
-        return None
+    def __set_name__(self, owner, name):
+        self.__name = name
 
     def __set__(self, instance, value):
         """Method sets value if validation is passed."""
@@ -24,7 +24,7 @@ class Field(object):
             return True
 
         self.__valid_field_type__(value)
-        setattr(instance, "value", value)
+        instance.__dict__[self.__name] = value
 
     def __delete__(self, instance):
         raise AttributeError("Can't delete attribute")

@@ -3,7 +3,7 @@ import datetime
 import fields
 
 
-class SimpleModel(object):
+class SimpleModel(fields.JsonModel):
     name = fields.String(required=True)
     test_list = fields.List()
     years = fields.Integer()
@@ -21,4 +21,4 @@ if __name__ == '__main__':
     simple_model.some_datetime = datetime.datetime.now()
     # simple_model.name = ""
 
-    print(simple_model.__dict__)
+    print(simple_model.years)
