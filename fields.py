@@ -1,4 +1,3 @@
-import calendar
 import datetime
 
 
@@ -66,13 +65,13 @@ class List(Field):
 
 
 class Timestamp(Field):
-    field_type = "Timestamp"
-    field_name = datetime.datetime
+    field_type = int
+    field_name = "Timestamp"
 
-    def __set__(self, instance, value):
-        """Method sets value if validation is passed."""
-        super()
-        setattr(instance, "value", calendar.timegm(value.utctimetuple()))
+
+class Datetime(Field):
+    field_type = datetime.datetime
+    field_name = "Datetime"
 
 
 class ForeignField(object):
