@@ -1,8 +1,11 @@
 import datetime
+import json
 
 
 class JsonModel(object):
-    pass
+    def to_json(self):
+        """Returns json object."""
+        return json.dumps(self.__dict__)
 
 
 class Field(object):
