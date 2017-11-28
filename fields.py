@@ -27,7 +27,7 @@ class Field(object):
             return True
 
         self.__valid_field_type__(value)
-        instance.__dict__[self.__name] = value
+        instance.__dict__[self.__name] = self.unificate_value(value)
 
     def __delete__(self, instance):
         raise AttributeError("Can't delete attribute")
@@ -45,6 +45,10 @@ class Field(object):
         if not isinstance(value, self.field_type):
             error = "Must be a {field_name}".format(field_name=self.field_name)
             raise TypeError(error)
+
+    def unificate_value(self, value):
+        """Unificates given value."""
+        return value
 
 
 class Integer(Field):
@@ -75,6 +79,13 @@ class Timestamp(Field):
 class Datetime(Field):
     field_type = datetime.datetime
     field_name = "Datetime"
+
+    def __init__(self, datetime_format="%Y-%m-%d %H:%M:%S", *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.datetime_format = datetime_format
+
+    def unificate_value(self, value):
+        return value.strftime(self.datetime_format)
 
 
 class ForeignField(Field):
