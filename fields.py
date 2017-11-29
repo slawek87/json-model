@@ -5,6 +5,16 @@ import json
 class JsonModel(object):
     def to_json(self):
         """Returns json object."""
+        def to_json_deep(instance, field_name):
+            """If field is JsonModel then set to current instance json object."""
+            field = getattr(instance, field_name)
+            to_json = getattr(field, "to_json", False)
+            if to_json:
+                setattr(instance, field_name, to_json())
+
+        for field_name in self.__dict__:
+            to_json_deep(self, field_name)
+
         return json.dumps(self.__dict__)
 
 

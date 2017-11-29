@@ -20,8 +20,8 @@ class SimpleModel(fields.JsonModel):
 
 
 if __name__ == '__main__':
-    # simple_model2 = SimpleModel2()
-    # simple_model2.name = "Sławek 1"
+    simple_model2 = SimpleModel2()
+    simple_model2.name = "Sławek 1"
 
     simple_model = SimpleModel()
     simple_model.name = "Sławek"
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     simple_model.years = 99
     simple_model.some_timestamp = 15
     simple_model.some_datetime = datetime.datetime.now()
-    # simple_model.foreign = simple_model2
+    simple_model.foreign = simple_model2
 
     # simple_model.name = ""
 
