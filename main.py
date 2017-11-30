@@ -35,3 +35,8 @@ if __name__ == '__main__':
 
     # print(simple_model.foreign.name)
     print(simple_model.to_json())
+
+    simple_model = SimpleModel(**{'name': 'slawek', 'elo': 2})
+    print(simple_model.to_json())
+
+    print(simple_model.name)

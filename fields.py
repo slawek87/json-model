@@ -3,6 +3,15 @@ import json
 
 
 class JsonModel(object):
+    def __init__(self, *arg, **kwargs):
+        if kwargs:
+            for field, value in kwargs.items():
+                if hasattr(self, field):
+                    setattr(self, field, value)
+                else:
+                    error = "There is no attribute {field}.".format(field=field)
+                    raise AttributeError(error)
+
     def to_json(self):
         """Returns json object."""
         def to_json_deep(instance, field_name):
