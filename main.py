@@ -1,7 +1,5 @@
-import datetime
-
-import fields
-import libs
+from json_model import fields
+from json_model import libs
 
 
 class SimpleModel2(libs.JsonModel):

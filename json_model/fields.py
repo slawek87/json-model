@@ -1,7 +1,6 @@
 import datetime
-from typing import NewType
 
-from libs import Field
+from json_model.libs import Field
 
 
 class Integer(Field):
