@@ -1,73 +1,7 @@
 import datetime
-import json
+from typing import NewType
 
-
-class JsonModel(object):
-    def __init__(self, *arg, **kwargs):
-        if kwargs:
-            for field, value in kwargs.items():
-                if hasattr(self, field):
-                    setattr(self, field, value)
-                else:
-                    error = "There is no attribute {field}.".format(field=field)
-                    raise AttributeError(error)
-
-    def to_json(self):
-        """Returns json object."""
-        def to_json_deep(instance, field_name):
-            """If field is JsonModel then set to current instance json object."""
-            field = getattr(instance, field_name)
-            to_json = getattr(field, "to_json", False)
-            if to_json:
-                setattr(instance, field_name, to_json())
-
-        for field_name in self.__dict__:
-            to_json_deep(self, field_name)
-
-        return json.dumps(self.__dict__)
-
-
-class Field(object):
-    field_type = None
-    field_name = None
-
-    empty_values = ["", None]
-
-    def __init__(self, default=None, required=False):
-        self.required = required
-        self.value = default
-
-    def __set_name__(self, owner, name):
-        self.__name = name
-
-    def __set__(self, instance, value):
-        """Method sets value if validation is passed."""
-        if self.__valid_empty_values__(value):
-            return True
-
-        self.__valid_field_type__(value)
-        instance.__dict__[self.__name] = self.unificate_value(value)
-
-    def __delete__(self, instance):
-        raise AttributeError("Can't delete attribute")
-
-    def __valid_empty_values__(self, value=None):
-        """Checks if value is not None when attribute `required` is True."""
-        if self.required and value in self.empty_values:
-            error = "Field {field_name} cannot be empty value.".format(field_name=self.field_name)
-            raise TypeError(error)
-        elif not value:
-            return True
-
-    def __valid_field_type__(self, value):
-        """Checks if given value has correct type."""
-        if not isinstance(value, self.field_type):
-            error = "Must be a {field_name}".format(field_name=self.field_name)
-            raise TypeError(error)
-
-    def unificate_value(self, value):
-        """Unificates given value."""
-        return value
+from libs import Field
 
 
 class Integer(Field):
