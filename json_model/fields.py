@@ -1,6 +1,6 @@
 import datetime
 
-from json_model.libs import Field
+from json_model.libs import Field, JsonModel
 
 
 class Integer(Field):
@@ -43,6 +43,6 @@ class Datetime(Field):
 class ForeignField(Field):
     field_name = "ForeignField"
 
-    def __init__(self, foreign_model, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.field_type = foreign_model
+        self.field_type = JsonModel
