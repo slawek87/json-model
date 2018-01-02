@@ -37,3 +37,15 @@ if __name__ == '__main__':
     student.created_at = int(time.time())
 
     print(student.to_json())
+
+    student = Student(**{
+        'name': 'Andrew',
+        'surname': 'Gardner',
+        'age': 26,
+        'day_of_birth': datetime.datetime.strptime('Jun 1 1999  1:33PM', '%b %d %Y %I:%M%p'),
+        'scholarship': Scholarship(**{'amount': 500.00, 'months': [1, 2, 3, 4]}),
+        'created_at': int(time.time())
+        }
+    )
+
+    print(student.to_json())

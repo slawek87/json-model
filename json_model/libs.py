@@ -21,6 +21,10 @@ class JsonModelBase(type):
 
 
 class JsonModel(metaclass=JsonModelBase):
+    def __init__(self, **fields):
+        for field, value in fields.items():
+            setattr(self, field, value)
+
     def get_json_fields(self):
         from json_model.fields import ForeignField
         fields = dict()
