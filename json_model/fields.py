@@ -1,6 +1,37 @@
 import datetime
 
-from json_model.libs import Field, JsonModel
+from json_model.libs import JsonModel
+from json_model.validators import Validation
+
+
+class Field(object):
+    field_type = None
+    field_name = None
+
+    def __init__(self, default=None, required=False):
+        self.required = required
+        self.value = default
+
+    def __set_name__(self, owner, name):
+        self.field_name = name
+
+    def __set__(self, instance, value):
+        """Method sets value if validation is passed."""
+        setattr(self, 'value', value)
+        instance.validation.validate(self)
+        setattr(self, 'value', self.unificate_value(value))
+        instance.__dict__[self.field_name] = self
+
+    def __get__(self, instance, owner):
+        Validation(self)
+        return self
+
+    def __delete__(self, instance):
+        raise AttributeError("Can't delete attribute")
+
+    def unificate_value(self, value):
+        """Unificates given value."""
+        return value
 
 
 class Integer(Field):
