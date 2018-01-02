@@ -38,7 +38,7 @@ class Student(libs.JsonModel):
     surname = fields.String(required=True)
     age = fields.Integer()
     day_of_birth = fields.Datetime()
-    scholarship = Scholarship()
+    scholarship = fields.ForeignField()
 
     created_at = fields.Timestamp()
 
