@@ -6,16 +6,16 @@ Json-Model is simple library to create Json Models from Python Objects. Library 
 
 Usage is really simple. Json-Model on this moment supports 7 basics fields:
 - `Integer`
-    * `String`
-    * `Float`
-    * `List`
-    * `Timestamp`
-    * `Datetime`
-    * `ForeignField`
+- `String`
+- `Float`
+- `List`
+- `Timestamp`
+- `Datetime`
+- `ForeignField`
 
 Each field has attribute:
-    * `required` - Boolean attribute in default is set to `False`.
-    * `default` - set default value when field is empty.
+- `required` - Boolean attribute in default is set to `False`.
+- `default` - set default value when field is empty.
 
 To start work with JsonModel, create Json-Model class with all fields what you need in Json object.
 
