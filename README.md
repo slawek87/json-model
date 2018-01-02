@@ -5,7 +5,7 @@ Json-Model is simple library to create Json Models from Python Objects. Library 
 # Usage
 
 Usage is really simple. Json-Model on this moment supports 7 basics fields:
-    * `Integer`
+- `Integer`
     * `String`
     * `Float`
     * `List`
