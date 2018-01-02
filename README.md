@@ -59,4 +59,7 @@ if __name__ == '__main__':
     student.created_at = int(time.time())
 
     print(student.to_json())
+    # {"name": "Andrew", "surname": "Gardner", "age": 26, "day_of_birth": "1999-06-01 13:33:00",
+    # "scholarship": {"amount": 500.0, "currency": "USD", "months": [1, 2, 3, 4, 5, 8, 9, 10]}, "created_at": 1514907880}
+
 ```
