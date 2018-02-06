@@ -2,6 +2,10 @@
 
 Json-Model is simple library to create Json Models from Python Objects. Library supports field validation by Python Types and required fields.
 
+# Instalation
+
+`pip install json-model`
+
 # Usage
 
 Usage is really simple. Json-Model on this moment supports 7 basics fields:
